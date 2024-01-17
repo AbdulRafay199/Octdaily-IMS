@@ -17,9 +17,16 @@
 :host ::ng-deep .p-dropdown-items {
  padding: 5px 0px;
 }
+:host ::ng-deep .p-multiselect-items {
+ padding: 5px 0px;
+}
 
 :host ::ng-deep .p-dropdown {
  width: 100%;
+ border-radius: 25px;
+}
+:host ::ng-deep .p-multiselect {
+ width: 90%;
  border-radius: 25px;
 }
 

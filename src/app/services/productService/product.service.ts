@@ -19,7 +19,7 @@ export class ProductService {
     return this.http.get<any[]>(`${this.apiurl}/fetchproduct`).pipe(
       map(products => {
         this.store.dispatch(fetchproduct({ products }));
-        return products; // You may or may not want to return the products from the service method
+        return products;
       }))
   }
 

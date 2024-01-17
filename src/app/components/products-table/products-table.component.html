@@ -12,7 +12,8 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4 d-flex">
-            <p-dropdown class="w-100 mt-2 mt-lg-0" [options]="options" [(ngModel)]="selectedOption" optionLabel="name" [showClear]="false" placeholder="Sort By:"></p-dropdown>
+            <p-dropdown class="w-50 mt-2 me-3 mt-lg-0" [options]="options" [(ngModel)]="selectedOption" optionLabel="name" [showClear]="false" placeholder="Sort By:"></p-dropdown>
+            <p-multiSelect class="w-75 mt-2  mt-lg-0"  [options]="options1" [(ngModel)]="selectedOption1" optionLabel="name" [showClear]="false" placeholder="Show by:"></p-multiSelect>
         </div>
     </div>
 
@@ -20,72 +21,75 @@
 
     <div class="table-custom mt-4">
         <table class="table table-striped table-light">
+
             <thead>
               <tr>
-                <th scope="col">Sno.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Rating</th>
+                <th *ngIf="checkvalue('sno')" scope="col">Sno.</th>
+                <th *ngIf="checkvalue('name')" scope="col">Name</th>
+                <th *ngIf="checkvalue('price')" scope="col">Price</th>
+                <th *ngIf="checkvalue('rating')" scope="col">Rating</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
+
             <tbody *ngIf="selectedOption.value==='1'">
 
-              <tr *ngFor="let each of paginatedProducts | searchFilter:searchval; index as i">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{each.name}}</td>
-                  <td>{{each.price | currency: '$'}}</td>
-                  <td><p-rating [(ngModel)]="each.rating" [readonly]="true" [cancel]="false" [stars]="5"></p-rating></td>
-                  <td><button class="btn btn-warning text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#editProductModal"><i class="pi pi-pencil"></i></button></td>
-                  <td><button class="btn btn-danger text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#dltProductModal"><i class="pi pi-trash"></i></button></td>
-              </tr>   
+                <tr *ngFor="let each of oldestProducts | searchFilter:searchval; index as i">
+                    <th *ngIf="checkvalue('sno')" scope="row">{{i+1}}</th>
+                    <td *ngIf="checkvalue('name')">{{each.name}}</td>
+                    <td *ngIf="checkvalue('price')">{{each.price | currency: '$'}}</td>
+                    <td *ngIf="checkvalue('rating')"><p-rating [(ngModel)]="each.rating" [readonly]="true" [cancel]="false" [stars]="5"></p-rating></td>
+                    <td><button class="btn btn-warning text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#editProductModal"><i class="pi pi-pencil"></i></button></td>
+                    <td><button class="btn btn-danger text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#dltProductModal"><i class="pi pi-trash"></i></button></td>
+                </tr>   
 
-              <!-- this is the last row showing total users, itemsperpage and previous and next button for pagination -->
-              <tr>
-                  <td>
-                      <b>Total Items:</b> {{ totalItems }}
-                  </td>
-                  <td>
-                      <b>Items per page:</b> {{ itemsPerPage }}
-                  </td>
-                  <td colSpan="5">
-                      <div className="container d-flex justify-content-center align-items-center">
-                          <button class="btn custombtn pi pi-angle-left me-3" (click)="previousPage()" [disabled]="currentPage === 1"></button>
-                          <span>{{ currentPage }}/{{ calculateTotalPages() }}</span>
-                          <button class="btn custombtn pi pi-angle-right ms-3" (click)="nextPage()"></button>
-                      </div>
-                  </td>
-              </tr>
+                <!-- this is the last row showing total users, itemsperpage and previous and next button for pagination -->
+                <tr>
+                    <td>
+                        <b>Total Items:</b> {{ totalItems }}
+                    </td>
+                    <td>
+                        <b>Items per page:</b> {{ itemsPerPage }}
+                    </td>
+                    <td colSpan="5">
+                        <div className="container d-flex justify-content-center align-items-center">
+                            <button class="btn custombtn pi pi-angle-left me-3" (click)="previousPage()" [disabled]="currentPage === 1"></button>
+                            <span>{{ currentPage }}/{{ calculateTotalPages() }}</span>
+                            <button class="btn custombtn pi pi-angle-right ms-3" (click)="nextPage()"></button>
+                        </div>
+                    </td>
+                </tr>
 
             </tbody>
+            
             <tbody *ngIf="selectedOption.value==='2'">
 
-              <tr *ngFor="let each of reversedProdList | searchFilter:searchval; index as i">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{each.name}}</td>
-                  <td>{{each.price | currency: '$'}}</td>
-                  <td><p-rating [(ngModel)]="each.rating" [readonly]="true" [cancel]="false" [stars]="5"></p-rating></td>
-                  <td><button class="btn btn-warning text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#editProductModal"><i class="pi pi-pencil"></i></button></td>
-                  <td><button class="btn btn-danger text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#dltProductModal"><i class="pi pi-trash"></i></button></td>
-              </tr>         
-              
-              <!-- this is the last row showing total users, itemsperpage and previous and next button for pagination -->
-              <tr>
-                <td>
-                    <b>Total Items:</b> {{ totalItems }}
-                </td>
-                <td>
-                    <b>Items per page:</b> {{ itemsPerPage }}
-                </td>
-                <td colSpan="5">
-                    <div className="container d-flex justify-content-center align-items-center">
-                        <button class="btn custombtn pi pi-angle-left me-3" (click)="previousPage()" [disabled]="currentPage === 1"></button>
-                        <span>{{ currentPage }}/{{ calculateTotalPages() }}</span>
-                        <button class="btn custombtn pi pi-angle-right ms-3" (click)="nextPage()"></button>
-                    </div>
-                </td>
-              </tr>
+                <tr *ngFor="let each of newestProdList | searchFilter:searchval; index as i">
+                    <th *ngIf="checkvalue('sno')" scope="row">{{i+1}}</th>
+                    <td *ngIf="checkvalue('name')">{{each.name}}</td>
+                    <td *ngIf="checkvalue('price')">{{each.price | currency: '$'}}</td>
+                    <td *ngIf="checkvalue('rating')"><p-rating [(ngModel)]="each.rating" [readonly]="true" [cancel]="false" [stars]="5"></p-rating></td>
+                    <td><button class="btn btn-warning text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#editProductModal"><i class="pi pi-pencil"></i></button></td>
+                    <td><button class="btn btn-danger text-light btn-sm" (click)="setProductToEdit(each)" data-bs-toggle="modal" data-bs-target="#dltProductModal"><i class="pi pi-trash"></i></button></td>
+                </tr>         
+                
+                <!-- this is the last row showing total users, itemsperpage and previous and next button for pagination -->
+                <tr>
+                    <td>
+                        <b>Total Items:</b> {{ totalItems }}
+                    </td>
+                    <td>
+                        <b>Items per page:</b> {{ itemsPerPage }}
+                    </td>
+                    <td colSpan="5">
+                        <div className="container d-flex justify-content-center align-items-center">
+                            <button class="btn custombtn pi pi-angle-left me-3" (click)="previousPage()" [disabled]="currentPage === 1"></button>
+                            <span>{{ currentPage }}/{{ calculateTotalPages() }}</span>
+                            <button class="btn custombtn pi pi-angle-right ms-3" (click)="nextPage()"></button>
+                        </div>
+                    </td>
+                </tr>
 
             </tbody>
           </table>

@@ -12,22 +12,26 @@ import { ProductService } from '../../services/productService/product.service';
   templateUrl: './edit-confirmation-modal.component.html',
   styleUrl: './edit-confirmation-modal.component.css'
 })
-export class EditConfirmationModalComponent implements OnInit{
+export class EditConfirmationModalComponent{
 
+  // get reference to close button in html file
   @ViewChild('closebtn') closebtn!: ElementRef;
 
+  // Dependency injection to inject services
   productService = inject(ProductService)
+
+  // Getting Product ID from Parent Component
   @Input() productId!:string;
 
+  // Default Product object to Edit
   productItem:any = {name:"", price:"", rating:""}
 
-  ngOnInit(): void {
-  }
-
+  // Function to change default value of form
   changeDefaultValue(item:any){
     this.productItem = {name:item.name, price:item.price, rating:item.rating}
   }
   
+  // Function to Edit selected product and call Patch API from services
   editProduct(){
     this.productService.editProducts(this.productItem,this.productId).subscribe(result=>{
       if(result.success){

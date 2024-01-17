@@ -11,29 +11,27 @@ import { ProductService } from '../../services/productService/product.service';
   templateUrl: './add-product-modal.component.html',
   styleUrl: './add-product-modal.component.css'
 })
-export class AddProductModalComponent implements OnInit{
+export class AddProductModalComponent{
 
+  // get reference to close button in html file
   @ViewChild('closebtn') closebtn!: ElementRef;
 
-  cred:any = {name:"", price:null,rating:null}
+  // Dependency injection to inject services
   productService = inject(ProductService)
 
+  // Product object to add
+  cred:any = {name:"", price:null,rating:null}
+
+  // function to add new product and call api from services
   addProduct(){
     this.productService.addProducts(this.cred).subscribe(result=>{
       if(result.success){
         this.productService.getProducts().subscribe(data=>{
           this.closebtn.nativeElement.click()
+          this.cred = {name:"", price:null,rating:null}
         })
       }
     })
   }
-
-  ngOnInit(): void {
-    // console.log(this.addbtn)
-  }
-
-
-
-
 
 }

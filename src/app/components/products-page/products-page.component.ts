@@ -15,11 +15,16 @@ import { filter } from 'rxjs';
 })
 export class ProductsPageComponent implements OnInit {
 
+    //Product Service and ngrx store is injected in this component so that service can be used
     productService = inject(ProductService)
     store = inject(Store)
+
+    //empty products array is declared and initialized
     products:any=[];
 
     ngOnInit(): void {
+
+      //getproducts() method is called from productService where data is fetched and sent to ngrx store
         this.productService.getProducts().subscribe(
             (products) => {
               this.store.dispatch(fetchproduct({ products }));
@@ -28,11 +33,5 @@ export class ProductsPageComponent implements OnInit {
               console.error('Error fetching products:', error);
             }
           );
-      
-          this.store.select('products').subscribe((data) => {
-            this.products = data;
-          });
     }
-
-
 }
