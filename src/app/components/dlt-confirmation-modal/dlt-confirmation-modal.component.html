@@ -1,0 +1,17 @@
+<div class="modal fade" id="dltProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Remove Product from Inventory</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to remove this product from the inventory?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" #closebtn>No</button>
+          <button type="button" class="btn btn-success" (click)="dltProduct()">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>

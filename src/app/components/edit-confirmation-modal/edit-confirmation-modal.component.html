@@ -1,0 +1,36 @@
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editModalLabel">Edit Product Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closebtn></button>
+        </div>
+        <div class="modal-body">
+          <p-inputGroup class="my-3">
+              <p-inputGroupAddon>
+                  <i class="pi pi-tag"></i>
+              </p-inputGroupAddon>
+              <input pInputText [(ngModel)]="productItem.name" name="name" placeholder="Product Name" id="editname" class="ps-2 w-100"/>
+          </p-inputGroup>
+
+          <p-inputGroup class="my-3">
+              <p-inputGroupAddon>
+                  <i class="pi pi-money-bill"></i>
+              </p-inputGroupAddon>
+              <input pInputText [(ngModel)]="productItem.price" name="price" placeholder="Product Price" id="editprice" class="ps-2 w-100"/>
+          </p-inputGroup>
+
+          <p-inputGroup class="my-3">
+              <p-inputGroupAddon>
+                  <i class="pi pi-star"></i>
+              </p-inputGroupAddon>
+              <input pInputText [(ngModel)]="productItem.rating" name="rating" placeholder="Product Rating(Max 5)" id="editrating" class="ps-2 w-100"/>
+          </p-inputGroup>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button> -->
+          <button type="button" class="btn btn-success" (click)="editProduct()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

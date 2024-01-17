@@ -1,0 +1,38 @@
+
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addModalLabel">Enter New Products Details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closebtn></button>
+          </div>
+          <div class="modal-body">
+              <p-inputGroup class="my-3">
+                  <p-inputGroupAddon>
+                      <i class="pi pi-tag"></i>
+                  </p-inputGroupAddon>
+                  <input pInputText [(ngModel)]="cred.name" name="name" placeholder="Product Name" class="ps-2 w-100"/>
+                  <!-- <input pInputText [formControl]="name" placeholder="Product Name" class="ps-2 w-100"/> -->
+              </p-inputGroup>
+
+              <p-inputGroup class="my-3">
+                  <p-inputGroupAddon>
+                      <i class="pi pi-money-bill"></i>
+                  </p-inputGroupAddon>
+                  <input pInputText [(ngModel)]="cred.price" name="price" placeholder="Product Price" class="ps-2 w-100"/>
+              </p-inputGroup>
+
+              <p-inputGroup class="my-3">
+                  <p-inputGroupAddon>
+                      <i class="pi pi-star"></i>
+                  </p-inputGroupAddon>
+                  <input pInputText [(ngModel)]="cred.rating" name="rating" placeholder="Product Rating(Max 5)" class="ps-2 w-100"/>
+              </p-inputGroup>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <button class="btn btn-success" (click)="addProduct()">Add Product</button>
+            </div>
+          </div>
+        </div>
+      </div>

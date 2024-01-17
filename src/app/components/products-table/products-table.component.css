@@ -1,0 +1,30 @@
+.table-custom{
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.table>:not(caption)>*>* {
+    padding: .5rem .5rem;
+    /* padding: .12rem .5rem; */
+}
+
+.input-group{
+    border: 1px solid #d1d1d1;
+    padding: 4px 0px;
+    border-radius: 25px;
+  }
+
+:host ::ng-deep .p-dropdown-items {
+ padding: 5px 0px;
+}
+
+:host ::ng-deep .p-dropdown {
+ width: 100%;
+ border-radius: 25px;
+}
+
+.custombtn{
+    background-color: rgb(41, 41, 41) !important;
+    color: white;
+    border: 0px !important;
+}

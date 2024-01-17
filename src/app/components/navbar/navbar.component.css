@@ -1,0 +1,11 @@
+.btn-custom{
+    background-color: #c4dc3c;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-custom:hover{
+    background-color: #9ab119;
+    transition: 0.7s ease all;
+}
